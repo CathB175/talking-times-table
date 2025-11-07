@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Talking 10 Times Table Friends</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", sans-serif;
+      text-align: center;
+      background-color: #ffeafc;
+      margin-top: 40px;
+    }
+    img {
+      width: 120px;
+      cursor: pointer;
+      margin: 15px;
+      border: 4px solid transparent;
+      border-radius: 20px;
+    }
+    img.selected {
+      border: 4px solid #ff66cc;
+      background-color: #fff0f9;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 15px;
+      border: none;
+      background-color: #ffb6c1;
+      cursor: pointer;
+    }
+    #nameInput {
+      font-size: 18px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #ffb6c1;
+    }
+  </style>
+</head>
+<body>
+  <h1>Talking 10 Times Table Friends</h1>
+  <p>Type your name to get started:</p>
+
+  <input type="text" id="nameInput" placeholder="Your name">
+  <br><br>
+
+  <div id="characters">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Unicorn" onclick="selectCharacter('Unicorn', this)">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/6164086.png" alt="Fox" onclick="selectCharacter('Fox', this)">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/6164083.png" alt="Turtle" onclick="selectCharacter('Turtle', this)">
+  </div>
+
+  <br>
+  <button onclick="startLesson()">Start the 10 Times Table</button>
+
+  <script>
+    let chosenCharacter = null;
+
+    function selectCharacter(name, element) {
+      chosenCharacter = name;
+      document.querySelectorAll('img').forEach(img => img.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9; // slightly slower for kids
+      speechSynthesis.speak(utterance);
+    }
+
+    async function startLesson() {
+      const name = document.getElementById('nameInput').value.trim();
+      if (!name) {
+        alert("Please type your name!");
+        return;
+      }
+      if (!chosenCharacter) {
+        alert("Please pick a helper character!");
+        return;
+      }
+
+      speak(`Hi ${name}! Let's do the 10 times table with your ${chosenCharacter} friend!`);
+      for (let i = 1; i <= 12; i++) {
+        speak(`${i} times 10 is`);
+        await new Promise(r => setTimeout(r, 1500));
+        speak(`${i * 10}`);
+        await new Promise(r => setTimeout(r, 2000));
+      }
+      speak(`Well done ${name}! You and your ${chosenCharacter} friend finished the 10 times table!`);
+    }
+  </script>
+</body>
+</html>
