@@ -15,6 +15,8 @@
       margin: 15px;
       border: 4px solid transparent;
       border-radius: 20px;
+      background-color: white;
+      padding: 10px;
     }
     img.selected {
       border: 4px solid #ff66cc;
@@ -44,7 +46,7 @@
   <br><br>
 
   <div id="characters">
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Unicorn" onclick="selectCharacter('Unicorn', this)">
+    <img src="https://cdn-icons-png.flaticon.com/512/3468/3468377.png" alt="Unicorn" onclick="selectCharacter('Unicorn', this)">
     <img src="https://cdn-icons-png.flaticon.com/512/616/6164086.png" alt="Fox" onclick="selectCharacter('Fox', this)">
     <img src="https://cdn-icons-png.flaticon.com/512/616/6164083.png" alt="Turtle" onclick="selectCharacter('Turtle', this)">
   </div>
@@ -63,7 +65,7 @@
 
     function speak(text) {
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.9; // slightly slower for kids
+      utterance.rate = 0.9; // slower for kids
       speechSynthesis.speak(utterance);
     }
 
